@@ -306,8 +306,8 @@ const styles = StyleSheet.create({
   cardTitle: {
     flex: 1,
     color: '#f3f4f6',
-    fontWeight: '700',
-    fontSize: 13,
+    fontWeight: '200',
+    fontSize: 10,
     lineHeight: 18,
   },
   badgesRow: {
