@@ -297,9 +297,8 @@ export default function HomeScreen() {
                     color: '#ffffff',
                   },
                 ]}>
-                <ThemedText>
                   Hello, I&apos;m
-                </ThemedText>
+                  { '\n' }
                 <ThemedText
                   style={[
                     styles.introName,
