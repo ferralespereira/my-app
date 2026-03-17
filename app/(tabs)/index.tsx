@@ -260,23 +260,8 @@ export default function HomeScreen() {
       </ThemedView>
       
       <ThemedView style={[styles.sectionCard, surface]}>
-        <View style={styles.sectionHeadingWrap}>
-          <ThemedText style={[styles.sectionHeading, { borderColor: palette.tint }]}>About Javier Ferrales</ThemedText>
-        </View>
 
         <View style={[styles.aboutGrid, isWide && styles.aboutGridWide]}>
-          <ThemedView style={[styles.aboutProfileCard, { backgroundColor: scheme === 'light' ? '#1f2937' : '#111827' }]}>
-            <Image
-              source={{ uri: 'https://javierfolder.com/jf.jpeg' }}
-              style={[styles.profileImage, { borderColor: palette.tint }]}
-              contentFit="cover"
-            />
-            <ThemedText style={styles.profileLocation}>Miami, FL</ThemedText>
-            <Pressable onPress={() => Linking.openURL('https://javierfolder.com')}>
-              <ThemedText style={[styles.profileLink, { color: palette.tint }]}>javierfolder.com</ThemedText>
-            </Pressable>
-          </ThemedView>
-
           <ThemedView
             style={[
               styles.aboutSummaryCard,
@@ -526,7 +511,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   aboutSummaryTitle: {
-    fontSize: 24,
+    fontSize: 20,
     lineHeight: 30,
     fontWeight: '800',
     marginBottom: 6,
