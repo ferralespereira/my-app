@@ -265,10 +265,10 @@ export default function HomeScreen() {
                 <ThemedText style={styles.ctaText}>View My Projects</ThemedText>
               </Pressable>
               <Pressable
-                onPress={() => Linking.openURL('https://javierfolder.com/#contact')}
-                style={[styles.ctaOutline, { borderColor: palette.tint }]}>
-                <ThemedText style={[styles.ctaOutlineText, { color: palette.tint }]}>Get In Touch</ThemedText>
-              </Pressable>
+              style={[styles.ctaOutline, { borderColor: palette.tint }]}
+              onPress={() => Linking.openURL('mailto:ferralespereira@gmail.com')}>
+              <ThemedText style={[styles.ctaOutlineText, { color: palette.tint }]}>Get In Touch</ThemedText>
+            </Pressable>
             </View>
           </View>
         </ThemedView>
@@ -414,10 +414,12 @@ export default function HomeScreen() {
           <ThemedText type="subtitle">Get In Touch</ThemedText>
           <ThemedText>Email: ferralespereira@gmail.com</ThemedText>
           <View style={styles.ctaRow}>
-            <Pressable style={[styles.cta, { backgroundColor: palette.tint }]}>
+            <Pressable style={[styles.cta, { backgroundColor: palette.tint }]}> 
               <ThemedText style={styles.ctaText}>View Projects</ThemedText>
             </Pressable>
-            <Pressable style={[styles.ctaOutline, { borderColor: palette.tint }]}>
+            <Pressable
+              style={[styles.ctaOutline, { borderColor: palette.tint }]}
+              onPress={() => Linking.openURL('mailto:ferralespereira@gmail.com')}>
               <ThemedText style={[styles.ctaOutlineText, { color: palette.tint }]}>Get In Touch</ThemedText>
             </Pressable>
           </View>
