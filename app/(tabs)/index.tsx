@@ -180,12 +180,31 @@ export default function HomeScreen() {
     scrollRef.current?.scrollTo({ y, animated: true });
   };
 
+  const handleScroll = (yOffset: number) => {
+    const probeY = yOffset + 140;
+    let nextSection: 'home' | 'summary' | 'teach' | 'frameworks' = 'home';
+
+    if (probeY >= sectionOffsets.frameworks) {
+      nextSection = 'frameworks';
+    } else if (probeY >= sectionOffsets.teach) {
+      nextSection = 'teach';
+    } else if (probeY >= sectionOffsets.summary) {
+      nextSection = 'summary';
+    }
+
+    if (nextSection !== activeSection) {
+      setActiveSection(nextSection);
+    }
+  };
+
   return (
     <View style={[styles.screen, { backgroundColor: '#111827' }]}> 
       <ScrollView
         ref={scrollRef}
         style={{ backgroundColor: '#111827' }}
         contentContainerStyle={styles.page}
+        onScroll={(event) => handleScroll(event.nativeEvent.contentOffset.y)}
+        scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}>
         <ThemedView style={[styles.introHero, { backgroundColor: '#111827' }]}> 
           <View style={styles.introContent}>
