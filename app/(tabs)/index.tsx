@@ -157,7 +157,7 @@ export default function HomeScreen() {
   const scrollRef = useRef<ScrollView>(null);
   const { width } = useWindowDimensions();
   const isWide = width >= 760;
-  const introTitleSize = width >= 1024 ? 64 : width >= 760 ? 54 : width >= 520 ? 44 : 15;
+  const introTitleSize = width >= 1024 ? 64 : width >= 760 ? 54 : width >= 520 ? 44 : 20;
   const introTitleLineHeight = width >= 1024 ? 72 : width >= 760 ? 60 : width >= 520 ? 50 : 24;
   const badgeSize = width >= 760 ? 196 : width >= 520 ? 176 : 140;
   const bulletFontSize = width >= 760 ? 22 : width >= 520 ? 19 : 16;
@@ -298,6 +298,8 @@ export default function HomeScreen() {
                   },
                 ]}>
                 Hello, I&apos;m{' '}
+                
+                {'\n'}
                 <ThemedText
                   style={[
                     styles.introName,
@@ -638,10 +640,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   profileImage: {
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 100,
     borderRadius: 64,
-    borderWidth: 4,
+    borderWidth: 2,
     padding: 4,
     marginBottom: 0,
   },
