@@ -170,7 +170,7 @@ export default function HomeScreen() {
   const palette = Colors[scheme];
   const { width } = useWindowDimensions();
   const isWide = width >= 760;
-  const introTitleSize = width >= 1024 ? 64 : width >= 760 ? 54 : width >= 520 ? 44 : 20;
+  const introTitleSize = width >= 1024 ? 64 : width >= 760 ? 54 : width >= 520 ? 44 : 15;
   const introTitleLineHeight = width >= 1024 ? 72 : width >= 760 ? 60 : width >= 520 ? 50 : 24;
   const badgeSize = width >= 760 ? 196 : width >= 520 ? 176 : 140;
   const bulletFontSize = width >= 760 ? 22 : width >= 520 ? 19 : 16;
@@ -195,28 +195,35 @@ export default function HomeScreen() {
       showsVerticalScrollIndicator={false}>
       <ThemedView style={[styles.introHero, surface]}>
         <View style={styles.introContent}>
-          <ThemedText
-            style={[
-              styles.introTitle,
-              {
-                fontFamily: Fonts.rounded,
-                fontSize: introTitleSize,
-                lineHeight: introTitleLineHeight,
-              },
-            ]}>
-            Hello, I&apos;m{' '}
+          <View style={styles.introHeadingRow}>
+            <Image
+              source={{ uri: 'https://javierfolder.com/jf.jpeg' }}
+              style={[styles.profileImage, { borderColor: palette.tint }]}
+              contentFit="cover"
+            />
             <ThemedText
               style={[
-                styles.introName,
+                styles.introTitle,
                 {
-                  color: palette.tint,
+                  fontFamily: Fonts.rounded,
                   fontSize: introTitleSize,
                   lineHeight: introTitleLineHeight,
                 },
               ]}>
-              Javier Ferrales
+              Hello, I&apos;m{' '}
+              <ThemedText
+                style={[
+                  styles.introName,
+                  {
+                    color: palette.tint,
+                    fontSize: introTitleSize,
+                    lineHeight: introTitleLineHeight,
+                  },
+                ]}>
+                Javier Ferrales
+              </ThemedText>
             </ThemedText>
-          </ThemedText>
+          </View>
 
           <Image
             source={{ uri: 'https://javierfolder.com/AI-Practitioner.webp' }}
@@ -415,10 +422,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 12,
   },
+  introHeadingRow: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 12,
+  },
   introTitle: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontWeight: '800',
     maxWidth: 920,
+    flexShrink: 1,
   },
   introName: {
     fontWeight: '900',
@@ -486,12 +501,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   profileImage: {
-    width: 128,
-    height: 128,
+    width: 80,
+    height: 80,
     borderRadius: 64,
     borderWidth: 4,
     padding: 4,
-    marginBottom: 8,
+    marginBottom: 0,
   },
   profileLocation: {
     color: '#ffffff',
