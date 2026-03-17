@@ -255,7 +255,7 @@ export default function HomeScreen() {
         </ThemedView>
 
         <ThemedView
-        style={[styles.sectionCard, surface]}
+        style={[styles.sectionCard, { backgroundColor: '#1f2937', borderWidth: 0 }]}
         onLayout={({ nativeEvent }) => {
           const y = nativeEvent.layout.y;
           setSectionOffsets((prev) => ({
@@ -269,13 +269,13 @@ export default function HomeScreen() {
             style={[
               styles.aboutSummaryCard,
               {
-                backgroundColor: scheme === 'light' ? '#f8fafc' : '#111827',
-                borderColor: palette.icon,
+                backgroundColor: '#1f2937',
+                borderWidth: 0,
               },
             ]}>
             <ThemedText style={[styles.aboutSummaryTitle, { color: palette.tint }]}>Summary & Expertise</ThemedText>
 
-            <ThemedText style={styles.aboutParagraph}>
+            <ThemedText lightColor="#ffffff" darkColor="#ffffff" style={styles.aboutParagraph}>
               I am a focused professional in developing robust web architecture, content, and platforms across both Backend and Frontend. My expertise spans multiple languages including PHP, Python, JavaScript, TypeScript, and HTML.
             </ThemedText>
 
@@ -287,12 +287,12 @@ export default function HomeScreen() {
 
             {isAboutExpanded && (
               <>
-                <ThemedText style={styles.aboutParagraph}>
-                  I&apos;m passionate about building scalable applications using modern <ThemedText type="defaultSemiBold">MVC architecture frameworks</ThemedText> like Laravel, Symfony, Angular, Node.js, and Django. I have significant experience with both <ThemedText type="defaultSemiBold">MongoDB</ThemedText> and relational databases such as <ThemedText type="defaultSemiBold">MySQL</ThemedText> and MariaDB, ensuring effective data creation and manipulation using SQL.
+                <ThemedText lightColor="#ffffff" darkColor="#ffffff" style={styles.aboutParagraph}>
+                  I&apos;m passionate about building scalable applications using modern <ThemedText type="defaultSemiBold" lightColor="#ffffff" darkColor="#ffffff">MVC architecture frameworks</ThemedText> like Laravel, Symfony, Angular, Node.js, and Django. I have significant experience with both <ThemedText type="defaultSemiBold" lightColor="#ffffff" darkColor="#ffffff">MongoDB</ThemedText> and relational databases such as <ThemedText type="defaultSemiBold" lightColor="#ffffff" darkColor="#ffffff">MySQL</ThemedText> and MariaDB, ensuring effective data creation and manipulation using SQL.
                 </ThemedText>
 
-                <ThemedText style={styles.aboutParagraph}>
-                  Furthermore, I possess a <ThemedText type="defaultSemiBold">Cloud Certificate Practitioner</ThemedText> status and experience with Linux OS. I am proficient in implementing essential <ThemedText type="defaultSemiBold">AWS services</ThemedText> (Route53, EC2, EBS, Load Balancer, Cloudfront, RDS) and utilize Git/GitHub for version control. I am driven to push every project to its highest level of performance and availability.
+                <ThemedText lightColor="#ffffff" darkColor="#ffffff" style={styles.aboutParagraph}>
+                  Furthermore, I possess a <ThemedText type="defaultSemiBold" lightColor="#ffffff" darkColor="#ffffff">Cloud Certificate Practitioner</ThemedText> status and experience with Linux OS. I am proficient in implementing essential <ThemedText type="defaultSemiBold" lightColor="#ffffff" darkColor="#ffffff">AWS services</ThemedText> (Route53, EC2, EBS, Load Balancer, Cloudfront, RDS) and utilize Git/GitHub for version control. I am driven to push every project to its highest level of performance and availability.
                 </ThemedText>
 
                 <Pressable onPress={() => setIsAboutExpanded(false)}>
