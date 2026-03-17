@@ -100,6 +100,53 @@ const SKILLS = [
   },
 ];
 
+const FRAMEWORKS = [
+  {
+    title: 'Laravel',
+    subtitle: 'PHP Framework',
+    icon: 'https://laravel.com/img/logomark.min.svg',
+  },
+  {
+    title: 'Symfony',
+    subtitle: 'PHP Framework',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/symfony/symfony-original.svg',
+    paddedIcon: true,
+  },
+  {
+    title: 'Angular',
+    subtitle: 'TypeScript Framework',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg',
+  },
+  {
+    title: 'Node.js',
+    subtitle: 'JavaScript Runtime',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+  },
+  {
+    title: 'Django',
+    subtitle: 'Python Framework',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg',
+    paddedIcon: true,
+  },
+  {
+    title: 'Flask',
+    subtitle: 'Python Microframework',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg',
+    paddedIcon: true,
+  },
+  {
+    title: 'jQuery',
+    subtitle: 'JavaScript Library',
+    icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg',
+  },
+  {
+    title: 'ASP.NET',
+    subtitle: 'C# Web Framework',
+    icon: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Microsoft_.NET_logo.png',
+    paddedIcon: true,
+  },
+];
+
 const PROJECTS = [
   {
     name: 'Fuel Company Inventory System',
@@ -124,6 +171,7 @@ export default function HomeScreen() {
   const { width, height } = useWindowDimensions();
   const isWide = width >= 760;
   const skillCardWidth = width >= 1280 ? '18%' : width >= 1024 ? '23%' : width >= 760 ? '31%' : width >= 520 ? '47%' : '100%';
+  const frameworkCardWidth = width >= 1024 ? '18%' : width >= 760 ? '31%' : width >= 520 ? '47%' : '100%';
 
   const surface = useMemo(
     () => ({
@@ -251,6 +299,38 @@ export default function HomeScreen() {
               </ThemedText>
               <ThemedText lightColor="#9ca3af" darkColor="#9ca3af" style={styles.skillSubtitle}>
                 {skill.subtitle}
+              </ThemedText>
+            </ThemedView>
+          ))}
+        </View>
+      </ThemedView>
+
+      <ThemedView style={[styles.sectionCard, surface]}>
+        <View style={styles.sectionHeadingWrap}>
+          <ThemedText style={[styles.sectionHeading, { borderColor: palette.tint }]}>Frameworks</ThemedText>
+        </View>
+
+        <View style={[styles.skillsGrid, styles.frameworksGrid]}>
+          {FRAMEWORKS.map((framework) => (
+            <ThemedView
+              key={framework.title}
+              style={[
+                styles.frameworkCard,
+                {
+                  width: frameworkCardWidth,
+                  backgroundColor: scheme === 'light' ? '#1f2937' : '#111827',
+                },
+              ]}>
+              <Image
+                source={{ uri: framework.icon }}
+                style={[styles.skillIcon, framework.paddedIcon && styles.skillIconPadded]}
+                contentFit="contain"
+              />
+              <ThemedText style={[styles.frameworkTitle, { color: palette.tint }]}>
+                {framework.title}
+              </ThemedText>
+              <ThemedText lightColor="#9ca3af" darkColor="#9ca3af" style={styles.skillSubtitle}>
+                {framework.subtitle}
               </ThemedText>
             </ThemedView>
           ))}
@@ -424,6 +504,9 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 12,
   },
+  frameworksGrid: {
+    justifyContent: 'center',
+  },
   skillCard: {
     borderRadius: 16,
     padding: 20,
@@ -466,6 +549,25 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 18,
     textAlign: 'center',
+  },
+  frameworkCard: {
+    borderRadius: 16,
+    padding: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 168,
+    shadowColor: '#3b82f6',
+    shadowOpacity: 0.16,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 4,
+  },
+  frameworkTitle: {
+    fontSize: 20,
+    lineHeight: 24,
+    fontWeight: '700',
+    textAlign: 'center',
+    marginBottom: 4,
   },
   projectsWrap: {
     gap: 10,
