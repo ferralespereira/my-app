@@ -201,6 +201,76 @@ export default function HomeScreen() {
 
   return (
     <View style={[styles.screen, { backgroundColor: '#111827' }]}> 
+
+      <View style={[styles.fixedTabsBar, surface]}>
+        <View style={styles.sectionTabsRow}>
+          <Pressable
+            style={[
+              styles.sectionTabButton,
+              { borderColor: palette.tint },
+              activeSection === 'home' && [styles.sectionTabButtonActive, { backgroundColor: palette.tint }],
+            ]}
+            onPress={() => scrollToSection('home')}>
+            <ThemedText
+              style={[
+                styles.sectionTabButtonText,
+                { color: palette.tint },
+                activeSection === 'home' && styles.sectionTabButtonTextActive,
+              ]}>
+              Intro
+            </ThemedText>
+          </Pressable>
+          <Pressable
+            style={[
+              styles.sectionTabButton,
+              { borderColor: palette.tint },
+              activeSection === 'summary' && [styles.sectionTabButtonActive, { backgroundColor: palette.tint }],
+            ]}
+            onPress={() => scrollToSection('summary')}>
+            <ThemedText
+              style={[
+                styles.sectionTabButtonText,
+                { color: palette.tint },
+                activeSection === 'summary' && styles.sectionTabButtonTextActive,
+              ]}>
+              Sumary
+            </ThemedText>
+          </Pressable>
+          <Pressable
+            style={[
+              styles.sectionTabButton,
+              { borderColor: palette.tint },
+              activeSection === 'teach' && [styles.sectionTabButtonActive, { backgroundColor: palette.tint }],
+            ]}
+            onPress={() => scrollToSection('teach')}>
+            <ThemedText
+              style={[
+                styles.sectionTabButtonText,
+                { color: palette.tint },
+                activeSection === 'teach' && styles.sectionTabButtonTextActive,
+              ]}>
+              Teach
+            </ThemedText>
+          </Pressable>
+          <Pressable
+            style={[
+              styles.sectionTabButton,
+              { borderColor: palette.tint },
+              activeSection === 'frameworks' && [styles.sectionTabButtonActive, { backgroundColor: palette.tint }],
+            ]}
+            onPress={() => scrollToSection('frameworks')}>
+            <ThemedText
+              style={[
+                styles.sectionTabButtonText,
+                { color: palette.tint },
+                activeSection === 'frameworks' && styles.sectionTabButtonTextActive,
+              ]}>
+              Frameworks
+            </ThemedText>
+          </Pressable>
+        </View>
+      </View>
+
       <ScrollView
         ref={scrollRef}
         style={{ backgroundColor: '#111827' }}
@@ -429,74 +499,7 @@ export default function HomeScreen() {
         </ThemedView>
       </ScrollView>
 
-      <View style={[styles.fixedTabsBar, surface]}>
-        <View style={styles.sectionTabsRow}>
-          <Pressable
-            style={[
-              styles.sectionTabButton,
-              { borderColor: palette.tint },
-              activeSection === 'home' && [styles.sectionTabButtonActive, { backgroundColor: palette.tint }],
-            ]}
-            onPress={() => scrollToSection('home')}>
-            <ThemedText
-              style={[
-                styles.sectionTabButtonText,
-                { color: palette.tint },
-                activeSection === 'home' && styles.sectionTabButtonTextActive,
-              ]}>
-              Intro
-            </ThemedText>
-          </Pressable>
-          <Pressable
-            style={[
-              styles.sectionTabButton,
-              { borderColor: palette.tint },
-              activeSection === 'summary' && [styles.sectionTabButtonActive, { backgroundColor: palette.tint }],
-            ]}
-            onPress={() => scrollToSection('summary')}>
-            <ThemedText
-              style={[
-                styles.sectionTabButtonText,
-                { color: palette.tint },
-                activeSection === 'summary' && styles.sectionTabButtonTextActive,
-              ]}>
-              Sumary
-            </ThemedText>
-          </Pressable>
-          <Pressable
-            style={[
-              styles.sectionTabButton,
-              { borderColor: palette.tint },
-              activeSection === 'teach' && [styles.sectionTabButtonActive, { backgroundColor: palette.tint }],
-            ]}
-            onPress={() => scrollToSection('teach')}>
-            <ThemedText
-              style={[
-                styles.sectionTabButtonText,
-                { color: palette.tint },
-                activeSection === 'teach' && styles.sectionTabButtonTextActive,
-              ]}>
-              Teach
-            </ThemedText>
-          </Pressable>
-          <Pressable
-            style={[
-              styles.sectionTabButton,
-              { borderColor: palette.tint },
-              activeSection === 'frameworks' && [styles.sectionTabButtonActive, { backgroundColor: palette.tint }],
-            ]}
-            onPress={() => scrollToSection('frameworks')}>
-            <ThemedText
-              style={[
-                styles.sectionTabButtonText,
-                { color: palette.tint },
-                activeSection === 'frameworks' && styles.sectionTabButtonTextActive,
-              ]}>
-              Frameworks
-            </ThemedText>
-          </Pressable>
-        </View>
-      </View>
+      
     </View>
   );
 }
@@ -596,13 +599,16 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   fixedTabsBar: {
-    position: 'absolute',
-    left: 16,
-    right: 16,
-    bottom: 16,
+    position: 'fixed',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    top: 50,
     borderWidth: 1,
     borderRadius: 16,
     padding: 10,
+    zIndex: 5,
+    alignContent: 'center',
   },
   sectionHeadingWrap: {
     alignItems: 'center',
