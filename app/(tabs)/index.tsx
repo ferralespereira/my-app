@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
-import { Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Image } from 'expo-image';
+import { Linking, Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -36,22 +37,61 @@ const PROJECTS = [
 export default function HomeScreen() {
   const scheme = useColorScheme() ?? 'light';
   const palette = Colors[scheme];
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   const isWide = width >= 760;
 
   const surface = useMemo(
     () => ({
-      borderColor: scheme === 'light' ? '#d5dde6' : '#2f3742',
-      backgroundColor: scheme === 'light' ? '#f7fafc' : '#1b222b',
+      borderColor: scheme === 'light' ? '#1f2937' : '#3b82f6',
+      backgroundColor: scheme === 'light' ? '#ffffff' : '#1f2937',
     }),
     [scheme],
   );
 
   return (
-    <ScrollView contentContainerStyle={styles.page} showsVerticalScrollIndicator={false}>
+    <ScrollView
+      style={{ backgroundColor: palette.background }}
+      contentContainerStyle={styles.page}
+      showsVerticalScrollIndicator={false}>
+      <ThemedView style={[styles.introHero, surface, { minHeight: height * 0.84 }]}>
+        <View style={styles.introContent}>
+          <ThemedText style={[styles.introTitle, { fontFamily: Fonts.rounded }]}>
+            Hello, I&apos;m <ThemedText style={[styles.introName, { color: palette.tint }]}>Javier Ferrales</ThemedText>
+          </ThemedText>
+
+          <Image
+            source={{ uri: 'https://javierfolder.com/AI-Practitioner.webp' }}
+            style={styles.badgeImage}
+            contentFit="contain"
+          />
+
+          <View style={styles.bulletList}>
+            <ThemedText style={styles.bulletItem}>- Full-Stack Web Developer</ThemedText>
+            <ThemedText style={styles.bulletItem}>- Cloud Certificate Practitioner</ThemedText>
+          </View>
+
+          <ThemedText style={styles.introLead}>
+            With a focus on scalable architecture and enterprise solutions.
+          </ThemedText>
+
+          <View style={[styles.introActions, isWide && styles.introActionsWide]}>
+            <Pressable
+              onPress={() => Linking.openURL('https://javierfolder.com/#projects')}
+              style={[styles.cta, styles.introPrimaryCta, { backgroundColor: palette.tint }]}>
+              <ThemedText style={styles.ctaText}>View My Projects</ThemedText>
+            </Pressable>
+            <Pressable
+              onPress={() => Linking.openURL('https://javierfolder.com/#contact')}
+              style={[styles.ctaOutline, { borderColor: palette.tint }]}>
+              <ThemedText style={[styles.ctaOutlineText, { color: palette.tint }]}>Get In Touch</ThemedText>
+            </Pressable>
+          </View>
+        </View>
+      </ThemedView>
+
       <ThemedView style={[styles.hero, surface]}>
-        <View style={[styles.glow, styles.glowOne, { backgroundColor: '#00a8e8' }]} />
-        <View style={[styles.glow, styles.glowTwo, { backgroundColor: '#f46036' }]} />
+        <View style={[styles.glow, styles.glowOne, { backgroundColor: '#3b82f6' }]} />
+        <View style={[styles.glow, styles.glowTwo, { backgroundColor: '#1f2937' }]} />
 
         <ThemedText style={[styles.kicker, { color: palette.tint }]}>JAVIERFOLDER STYLE VIEW</ThemedText>
         <ThemedText style={[styles.heroTitle, { fontFamily: Fonts.rounded }]}>
@@ -63,10 +103,10 @@ export default function HomeScreen() {
         </ThemedText>
 
         <View style={[styles.badgeRow, isWide && styles.badgeRowWide]}>
-          <View style={[styles.badge, { borderColor: palette.tint }]}>
+          <View style={[styles.badge, { borderColor: palette.tint, backgroundColor: '#3b82f620' }]}>
             <ThemedText style={styles.badgeText}>Full-Stack Web Developer</ThemedText>
           </View>
-          <View style={[styles.badge, { borderColor: palette.tint }]}>
+          <View style={[styles.badge, { borderColor: palette.tint, backgroundColor: '#3b82f620' }]}>
             <ThemedText style={styles.badgeText}>Cloud Practitioner</ThemedText>
           </View>
         </View>
@@ -128,6 +168,64 @@ const styles = StyleSheet.create({
     padding: 16,
     gap: 12,
     paddingBottom: 24,
+  },
+  introHero: {
+    borderWidth: 1,
+    borderRadius: 20,
+    padding: 18,
+    justifyContent: 'center',
+  },
+  introContent: {
+    alignItems: 'center',
+    gap: 12,
+  },
+  introTitle: {
+    fontSize: 44,
+    lineHeight: 50,
+    textAlign: 'center',
+    fontWeight: '800',
+  },
+  introName: {
+    fontWeight: '900',
+  },
+  badgeImage: {
+    height: 220,
+    width: 220,
+    borderRadius: 8,
+  },
+  bulletList: {
+    width: '100%',
+    maxWidth: 420,
+    gap: 6,
+  },
+  bulletItem: {
+    textAlign: 'center',
+    fontSize: 24,
+    lineHeight: 30,
+    fontWeight: '700',
+  },
+  introLead: {
+    textAlign: 'center',
+    fontSize: 20,
+    lineHeight: 28,
+    maxWidth: 640,
+  },
+  introActions: {
+    marginTop: 6,
+    gap: 10,
+    width: '100%',
+  },
+  introActionsWide: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  introPrimaryCta: {
+    shadowColor: '#3b82f6',
+    shadowOpacity: 0.35,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 5,
   },
   hero: {
     borderWidth: 1,
