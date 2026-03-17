@@ -233,7 +233,7 @@ export default function HomeScreen() {
                 { color: palette.tint },
                 activeSection === 'summary' && styles.sectionTabButtonTextActive,
               ]}>
-              Sumary
+              Summary
             </ThemedText>
           </Pressable>
           <Pressable
@@ -249,7 +249,7 @@ export default function HomeScreen() {
                 { color: palette.tint },
                 activeSection === 'teach' && styles.sectionTabButtonTextActive,
               ]}>
-              Teach
+              Tech
             </ThemedText>
           </Pressable>
           <Pressable
