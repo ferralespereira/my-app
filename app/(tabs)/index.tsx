@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Linking, Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
@@ -147,28 +147,13 @@ const FRAMEWORKS = [
   },
 ];
 
-const PROJECTS = [
-  {
-    name: 'Fuel Company Inventory System',
-    stack: 'Laravel, MySQL, Deployment',
-    description: 'Inventory workflows and reporting for operational teams.',
-  },
-  {
-    name: 'Angular + Node Dev Forum',
-    stack: 'Angular, Node.js, MongoDB',
-    description: 'Community platform for technical discussions and code sharing.',
-  },
-  {
-    name: 'Flask Real-Time Chat',
-    stack: 'Flask, Socket.IO',
-    description: 'Lightweight messaging app with real-time communication.',
-  },
-];
-
 export default function HomeScreen() {
   const scheme = useColorScheme() ?? 'light';
   const palette = Colors[scheme];
   const [isAboutExpanded, setIsAboutExpanded] = useState(false);
+  const [activeSection, setActiveSection] = useState<'home' | 'summary' | 'teach' | 'frameworks'>('home');
+  const [sectionOffsets, setSectionOffsets] = useState({ home: 0, summary: 0, teach: 0, frameworks: 0 });
+  const scrollRef = useRef<ScrollView>(null);
   const { width } = useWindowDimensions();
   const isWide = width >= 760;
   const introTitleSize = width >= 1024 ? 64 : width >= 760 ? 54 : width >= 520 ? 44 : 15;
@@ -189,78 +174,94 @@ export default function HomeScreen() {
     [scheme],
   );
 
+  const scrollToSection = (section: 'home' | 'summary' | 'teach' | 'frameworks') => {
+    setActiveSection(section);
+    const y = Math.max(sectionOffsets[section] - 12, 0);
+    scrollRef.current?.scrollTo({ y, animated: true });
+  };
+
   return (
-    <ScrollView
-      style={{ backgroundColor: palette.background }}
-      contentContainerStyle={styles.page}
-      showsVerticalScrollIndicator={false}>
-      <ThemedView style={[styles.introHero, surface]}>
-        <View style={styles.introContent}>
-          <View style={styles.introHeadingRow}>
-            <Image
-              source={{ uri: 'https://javierfolder.com/jf.jpeg' }}
-              style={[styles.profileImage, { borderColor: palette.tint }]}
-              contentFit="cover"
-            />
-            <ThemedText
-              style={[
-                styles.introTitle,
-                {
-                  fontFamily: Fonts.rounded,
-                  fontSize: introTitleSize,
-                  lineHeight: introTitleLineHeight,
-                },
-              ]}>
-              Hello, I&apos;m{' '}
+    <View style={[styles.screen, { backgroundColor: palette.background }]}>
+      <ScrollView
+        ref={scrollRef}
+        style={{ backgroundColor: palette.background }}
+        contentContainerStyle={styles.page}
+        showsVerticalScrollIndicator={false}>
+        <ThemedView style={[styles.introHero, surface]}>
+          <View style={styles.introContent}>
+            <View style={styles.introHeadingRow}>
+              <Image
+                source={{ uri: 'https://javierfolder.com/jf.jpeg' }}
+                style={[styles.profileImage, { borderColor: palette.tint }]}
+                contentFit="cover"
+              />
               <ThemedText
                 style={[
-                  styles.introName,
+                  styles.introTitle,
                   {
-                    color: palette.tint,
+                    fontFamily: Fonts.rounded,
                     fontSize: introTitleSize,
                     lineHeight: introTitleLineHeight,
                   },
                 ]}>
-                Javier Ferrales
+                Hello, I&apos;m{' '}
+                <ThemedText
+                  style={[
+                    styles.introName,
+                    {
+                      color: palette.tint,
+                      fontSize: introTitleSize,
+                      lineHeight: introTitleLineHeight,
+                    },
+                  ]}>
+                  Javier Ferrales
+                </ThemedText>
               </ThemedText>
+            </View>
+
+            <Image
+              source={{ uri: 'https://javierfolder.com/AI-Practitioner.webp' }}
+              style={[styles.badgeImage, { height: badgeSize, width: badgeSize }]}
+              contentFit="contain"
+            />
+
+            <View style={styles.bulletList}>
+              <ThemedText style={[styles.bulletItem, { fontSize: bulletFontSize, lineHeight: bulletLineHeight }]}>
+                - Full-Stack Web Developer
+              </ThemedText>
+              <ThemedText style={[styles.bulletItem, { fontSize: bulletFontSize, lineHeight: bulletLineHeight }]}>
+                - Cloud Certificate Practitioner
+              </ThemedText>
+            </View>
+
+            <ThemedText style={[styles.introLead, { fontSize: introLeadSize, lineHeight: introLeadLineHeight }]}>
+              With a focus on scalable architecture and enterprise solutions.
             </ThemedText>
+
+            <View style={[styles.introActions, isWide && styles.introActionsWide]}>
+              <Pressable
+                onPress={() => Linking.openURL('https://javierfolder.com/#projects')}
+                style={[styles.cta, styles.introPrimaryCta, { backgroundColor: palette.tint }]}>
+                <ThemedText style={styles.ctaText}>View My Projects</ThemedText>
+              </Pressable>
+              <Pressable
+                onPress={() => Linking.openURL('https://javierfolder.com/#contact')}
+                style={[styles.ctaOutline, { borderColor: palette.tint }]}>
+                <ThemedText style={[styles.ctaOutlineText, { color: palette.tint }]}>Get In Touch</ThemedText>
+              </Pressable>
+            </View>
           </View>
+        </ThemedView>
 
-          <Image
-            source={{ uri: 'https://javierfolder.com/AI-Practitioner.webp' }}
-            style={[styles.badgeImage, { height: badgeSize, width: badgeSize }]}
-            contentFit="contain"
-          />
-
-          <View style={styles.bulletList}>
-            <ThemedText style={[styles.bulletItem, { fontSize: bulletFontSize, lineHeight: bulletLineHeight }]}>
-              - Full-Stack Web Developer
-            </ThemedText>
-            <ThemedText style={[styles.bulletItem, { fontSize: bulletFontSize, lineHeight: bulletLineHeight }]}>
-              - Cloud Certificate Practitioner
-            </ThemedText>
-          </View>
-
-          <ThemedText style={[styles.introLead, { fontSize: introLeadSize, lineHeight: introLeadLineHeight }]}>
-            With a focus on scalable architecture and enterprise solutions.
-          </ThemedText>
-
-          <View style={[styles.introActions, isWide && styles.introActionsWide]}>
-            <Pressable
-              onPress={() => Linking.openURL('https://javierfolder.com/#projects')}
-              style={[styles.cta, styles.introPrimaryCta, { backgroundColor: palette.tint }]}>
-              <ThemedText style={styles.ctaText}>View My Projects</ThemedText>
-            </Pressable>
-            <Pressable
-              onPress={() => Linking.openURL('https://javierfolder.com/#contact')}
-              style={[styles.ctaOutline, { borderColor: palette.tint }]}>
-              <ThemedText style={[styles.ctaOutlineText, { color: palette.tint }]}>Get In Touch</ThemedText>
-            </Pressable>
-          </View>
-        </View>
-      </ThemedView>
-      
-      <ThemedView style={[styles.sectionCard, surface]}>
+        <ThemedView
+        style={[styles.sectionCard, surface]}
+        onLayout={({ nativeEvent }) => {
+          const y = nativeEvent.layout.y;
+          setSectionOffsets((prev) => ({
+            ...prev,
+            summary: y,
+          }));
+        }}>
 
         <View style={[styles.aboutGrid, isWide && styles.aboutGridWide]}>
           <ThemedView
@@ -302,7 +303,15 @@ export default function HomeScreen() {
         </View>
       </ThemedView>
 
-      <ThemedView style={[styles.sectionCard, surface]}>
+        <ThemedView
+        style={[styles.sectionCard, surface]}
+        onLayout={({ nativeEvent }) => {
+          const y = nativeEvent.layout.y;
+          setSectionOffsets((prev) => ({
+            ...prev,
+            teach: y,
+          }));
+        }}>
         <View style={styles.sectionHeadingWrap}>
           <ThemedText style={[styles.sectionHeading, { borderColor: palette.tint }]}>
             Tech Stack & Computer Skills
@@ -341,7 +350,15 @@ export default function HomeScreen() {
         </View>
       </ThemedView>
 
-      <ThemedView style={[styles.sectionCard, surface]}>
+        <ThemedView
+        style={[styles.sectionCard, surface]}
+        onLayout={({ nativeEvent }) => {
+          const y = nativeEvent.layout.y;
+          setSectionOffsets((prev) => ({
+            ...prev,
+            frameworks: y,
+          }));
+        }}>
         <View style={styles.sectionHeadingWrap}>
           <ThemedText style={[styles.sectionHeading, { borderColor: palette.tint }]}>Frameworks</ThemedText>
         </View>
@@ -373,27 +390,100 @@ export default function HomeScreen() {
         </View>
       </ThemedView>
 
-      <ThemedView style={[styles.sectionCard, surface]}>
-        <ThemedText type="subtitle">Get In Touch</ThemedText>
-        <ThemedText>Email: ferralespereira@gmail.com</ThemedText>
-        <View style={styles.ctaRow}>
-          <Pressable style={[styles.cta, { backgroundColor: palette.tint }]}>
-            <ThemedText style={styles.ctaText}>View Projects</ThemedText>
+        <ThemedView style={[styles.sectionCard, surface]}>
+          <ThemedText type="subtitle">Get In Touch</ThemedText>
+          <ThemedText>Email: ferralespereira@gmail.com</ThemedText>
+          <View style={styles.ctaRow}>
+            <Pressable style={[styles.cta, { backgroundColor: palette.tint }]}>
+              <ThemedText style={styles.ctaText}>View Projects</ThemedText>
+            </Pressable>
+            <Pressable style={[styles.ctaOutline, { borderColor: palette.tint }]}>
+              <ThemedText style={[styles.ctaOutlineText, { color: palette.tint }]}>Get In Touch</ThemedText>
+            </Pressable>
+          </View>
+        </ThemedView>
+      </ScrollView>
+
+      <View style={[styles.fixedTabsBar, surface]}>
+        <View style={styles.sectionTabsRow}>
+          <Pressable
+            style={[
+              styles.sectionTabButton,
+              { borderColor: palette.tint },
+              activeSection === 'home' && [styles.sectionTabButtonActive, { backgroundColor: palette.tint }],
+            ]}
+            onPress={() => scrollToSection('home')}>
+            <ThemedText
+              style={[
+                styles.sectionTabButtonText,
+                { color: palette.tint },
+                activeSection === 'home' && styles.sectionTabButtonTextActive,
+              ]}>
+              Home
+            </ThemedText>
           </Pressable>
-          <Pressable style={[styles.ctaOutline, { borderColor: palette.tint }]}>
-            <ThemedText style={[styles.ctaOutlineText, { color: palette.tint }]}>Get In Touch</ThemedText>
+          <Pressable
+            style={[
+              styles.sectionTabButton,
+              { borderColor: palette.tint },
+              activeSection === 'summary' && [styles.sectionTabButtonActive, { backgroundColor: palette.tint }],
+            ]}
+            onPress={() => scrollToSection('summary')}>
+            <ThemedText
+              style={[
+                styles.sectionTabButtonText,
+                { color: palette.tint },
+                activeSection === 'summary' && styles.sectionTabButtonTextActive,
+              ]}>
+              Sumary
+            </ThemedText>
+          </Pressable>
+          <Pressable
+            style={[
+              styles.sectionTabButton,
+              { borderColor: palette.tint },
+              activeSection === 'teach' && [styles.sectionTabButtonActive, { backgroundColor: palette.tint }],
+            ]}
+            onPress={() => scrollToSection('teach')}>
+            <ThemedText
+              style={[
+                styles.sectionTabButtonText,
+                { color: palette.tint },
+                activeSection === 'teach' && styles.sectionTabButtonTextActive,
+              ]}>
+              Teach
+            </ThemedText>
+          </Pressable>
+          <Pressable
+            style={[
+              styles.sectionTabButton,
+              { borderColor: palette.tint },
+              activeSection === 'frameworks' && [styles.sectionTabButtonActive, { backgroundColor: palette.tint }],
+            ]}
+            onPress={() => scrollToSection('frameworks')}>
+            <ThemedText
+              style={[
+                styles.sectionTabButtonText,
+                { color: palette.tint },
+                activeSection === 'frameworks' && styles.sectionTabButtonTextActive,
+              ]}>
+              Frameworks
+            </ThemedText>
           </Pressable>
         </View>
-      </ThemedView>
-    </ScrollView>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   page: {
     padding: 16,
     gap: 12,
-    paddingBottom: 24,
+    paddingBottom: 110,
   },
   introHero: {
     borderWidth: 1,
@@ -457,6 +547,37 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 4 },
     elevation: 5,
+  },
+  sectionTabsRow: {
+    flexDirection: 'row',
+    gap: 8,
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+  },
+  sectionTabButton: {
+    borderWidth: 1,
+    borderRadius: 999,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+  },
+  sectionTabButtonText: {
+    fontSize: 13,
+    fontWeight: '700',
+  },
+  sectionTabButtonActive: {
+    borderColor: 'transparent',
+  },
+  sectionTabButtonTextActive: {
+    color: '#ffffff',
+  },
+  fixedTabsBar: {
+    position: 'absolute',
+    left: 16,
+    right: 16,
+    bottom: 16,
+    borderWidth: 1,
+    borderRadius: 16,
+    padding: 10,
   },
   sectionHeadingWrap: {
     alignItems: 'center',
