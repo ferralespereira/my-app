@@ -561,7 +561,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   sectionTabButtonText: {
-    fontSize: 13,
+    fontSize: 8,
     fontWeight: '700',
   },
   sectionTabButtonActive: {
