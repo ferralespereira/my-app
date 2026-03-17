@@ -1,4 +1,5 @@
 import { Image } from 'expo-image';
+import { useRouter } from 'expo-router';
 import { useMemo, useRef, useState } from 'react';
 import { Linking, Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
@@ -165,6 +166,7 @@ export default function HomeScreen() {
   const introLeadLineHeight = width >= 760 ? 28 : 24;
   const skillCardWidth = width >= 1280 ? '17%' : width >= 1024 ? '22%' : width >= 760 ? '30%' : width >= 520 ? '46%' : '48%';
   const frameworkCardWidth = width >= 1024 ? '17%' : width >= 760 ? '30%' : width >= 520 ? '46%' : '48%';
+  const router = useRouter();
 
   const surface = useMemo(
     () => ({
@@ -260,8 +262,8 @@ export default function HomeScreen() {
 
             <View style={[styles.introActions, isWide && styles.introActionsWide]}>
               <Pressable
-                onPress={() => Linking.openURL('https://javierfolder.com/#projects')}
-                style={[styles.cta, styles.introPrimaryCta, { backgroundColor: palette.tint }]}>
+                onPress={() => router.push('/catalog')}
+                style={[styles.cta, styles.introPrimaryCta, { backgroundColor: palette.tint }]}> 
                 <ThemedText style={styles.ctaText}>View My Projects</ThemedText>
               </Pressable>
               <Pressable
@@ -414,7 +416,8 @@ export default function HomeScreen() {
           <ThemedText type="subtitle">Get In Touch</ThemedText>
           <ThemedText>Email: ferralespereira@gmail.com</ThemedText>
           <View style={styles.ctaRow}>
-            <Pressable style={[styles.cta, { backgroundColor: palette.tint }]}> 
+            <Pressable style={[styles.cta, { backgroundColor: palette.tint }]} 
+            onPress={() => router.push('/catalog')}>
               <ThemedText style={styles.ctaText}>View Projects</ThemedText>
             </Pressable>
             <Pressable
