@@ -178,7 +178,8 @@ export default function HomeScreen() {
 
   const scrollToSection = (section: 'home' | 'summary' | 'teach' | 'frameworks') => {
     setActiveSection(section);
-    const y = Math.max(sectionOffsets[section] - 12, 0);
+    const TAB_BAR_HEIGHT = 60;
+    const y = Math.max(sectionOffsets[section] - TAB_BAR_HEIGHT, 0);
     scrollRef.current?.scrollTo({ y, animated: true });
   };
 
