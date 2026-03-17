@@ -170,6 +170,13 @@ export default function HomeScreen() {
   const palette = Colors[scheme];
   const { width, height } = useWindowDimensions();
   const isWide = width >= 760;
+  const introTitleSize = width >= 1024 ? 64 : width >= 760 ? 54 : width >= 520 ? 44 : 34;
+  const introTitleLineHeight = width >= 1024 ? 72 : width >= 760 ? 60 : width >= 520 ? 50 : 40;
+  const badgeSize = width >= 760 ? 196 : width >= 520 ? 176 : 140;
+  const bulletFontSize = width >= 760 ? 22 : width >= 520 ? 19 : 16;
+  const bulletLineHeight = width >= 760 ? 28 : width >= 520 ? 25 : 22;
+  const introLeadSize = width >= 760 ? 20 : 17;
+  const introLeadLineHeight = width >= 760 ? 28 : 24;
   const skillCardWidth = width >= 1280 ? '18%' : width >= 1024 ? '23%' : width >= 760 ? '31%' : width >= 520 ? '47%' : '100%';
   const frameworkCardWidth = width >= 1024 ? '18%' : width >= 760 ? '31%' : width >= 520 ? '47%' : '100%';
 
@@ -188,22 +195,45 @@ export default function HomeScreen() {
       showsVerticalScrollIndicator={false}>
       <ThemedView style={[styles.introHero, surface, { minHeight: height * 0.84 }]}>
         <View style={styles.introContent}>
-          <ThemedText style={[styles.introTitle, { fontFamily: Fonts.rounded }]}>
-            Hello, I&apos;m <ThemedText style={[styles.introName, { color: palette.tint }]}>Javier Ferrales</ThemedText>
+          <ThemedText
+            style={[
+              styles.introTitle,
+              {
+                fontFamily: Fonts.rounded,
+                fontSize: introTitleSize,
+                lineHeight: introTitleLineHeight,
+              },
+            ]}>
+            Hello, I&apos;m{' '}
+            <ThemedText
+              style={[
+                styles.introName,
+                {
+                  color: palette.tint,
+                  fontSize: introTitleSize,
+                  lineHeight: introTitleLineHeight,
+                },
+              ]}>
+              Javier Ferrales
+            </ThemedText>
           </ThemedText>
 
           <Image
             source={{ uri: 'https://javierfolder.com/AI-Practitioner.webp' }}
-            style={styles.badgeImage}
+            style={[styles.badgeImage, { height: badgeSize, width: badgeSize }]}
             contentFit="contain"
           />
 
           <View style={styles.bulletList}>
-            <ThemedText style={styles.bulletItem}>- Full-Stack Web Developer</ThemedText>
-            <ThemedText style={styles.bulletItem}>- Cloud Certificate Practitioner</ThemedText>
+            <ThemedText style={[styles.bulletItem, { fontSize: bulletFontSize, lineHeight: bulletLineHeight }]}>
+              - Full-Stack Web Developer
+            </ThemedText>
+            <ThemedText style={[styles.bulletItem, { fontSize: bulletFontSize, lineHeight: bulletLineHeight }]}>
+              - Cloud Certificate Practitioner
+            </ThemedText>
           </View>
 
-          <ThemedText style={styles.introLead}>
+          <ThemedText style={[styles.introLead, { fontSize: introLeadSize, lineHeight: introLeadLineHeight }]}>
             With a focus on scalable architecture and enterprise solutions.
           </ThemedText>
 
@@ -385,17 +415,14 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   introTitle: {
-    fontSize: 44,
-    lineHeight: 50,
     textAlign: 'center',
     fontWeight: '800',
+    maxWidth: 920,
   },
   introName: {
     fontWeight: '900',
   },
   badgeImage: {
-    height: 220,
-    width: 220,
     borderRadius: 8,
   },
   bulletList: {
@@ -404,15 +431,11 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   bulletItem: {
-    textAlign: 'center',
-    fontSize: 24,
-    lineHeight: 30,
+    textAlign: 'left',
     fontWeight: '700',
   },
   introLead: {
     textAlign: 'center',
-    fontSize: 20,
-    lineHeight: 28,
     maxWidth: 640,
   },
   introActions: {
