@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
 import { Image } from 'expo-image';
+import { useMemo } from 'react';
 import { Linking, Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
@@ -88,37 +88,49 @@ export default function HomeScreen() {
           </View>
         </View>
       </ThemedView>
-
-      <ThemedView style={[styles.hero, surface]}>
-        <View style={[styles.glow, styles.glowOne, { backgroundColor: '#3b82f6' }]} />
-        <View style={[styles.glow, styles.glowTwo, { backgroundColor: '#1f2937' }]} />
-
-        <ThemedText style={[styles.kicker, { color: palette.tint }]}>JAVIERFOLDER STYLE VIEW</ThemedText>
-        <ThemedText style={[styles.heroTitle, { fontFamily: Fonts.rounded }]}>
-          Hello, I&apos;m Javier Ferrales
-        </ThemedText>
-        <ThemedText style={styles.heroSubtitle}>
-          Full-stack developer focused on scalable architecture, platform quality, and cloud-ready
-          delivery.
-        </ThemedText>
-
-        <View style={[styles.badgeRow, isWide && styles.badgeRowWide]}>
-          <View style={[styles.badge, { borderColor: palette.tint, backgroundColor: '#3b82f620' }]}>
-            <ThemedText style={styles.badgeText}>Full-Stack Web Developer</ThemedText>
-          </View>
-          <View style={[styles.badge, { borderColor: palette.tint, backgroundColor: '#3b82f620' }]}>
-            <ThemedText style={styles.badgeText}>Cloud Practitioner</ThemedText>
-          </View>
-        </View>
-      </ThemedView>
-
+      
       <ThemedView style={[styles.sectionCard, surface]}>
-        <ThemedText type="subtitle">About</ThemedText>
-        <ThemedText>
-          I build robust backend and frontend solutions with a strong focus on maintainability,
-          performance, and business impact. I enjoy turning complex requirements into reliable,
-          production-ready systems.
-        </ThemedText>
+        <View style={styles.sectionHeadingWrap}>
+          <ThemedText style={[styles.sectionHeading, { borderColor: palette.tint }]}>About Javier Ferrales</ThemedText>
+        </View>
+
+        <View style={[styles.aboutGrid, isWide && styles.aboutGridWide]}>
+          <ThemedView style={[styles.aboutProfileCard, { backgroundColor: scheme === 'light' ? '#1f2937' : '#111827' }]}>
+            <Image
+              source={{ uri: 'https://javierfolder.com/jf.jpeg' }}
+              style={[styles.profileImage, { borderColor: palette.tint }]}
+              contentFit="cover"
+            />
+            <ThemedText style={styles.profileLocation}>Miami, FL</ThemedText>
+            <Pressable onPress={() => Linking.openURL('https://javierfolder.com')}>
+              <ThemedText style={[styles.profileLink, { color: palette.tint }]}>javierfolder.com</ThemedText>
+            </Pressable>
+          </ThemedView>
+
+          <ThemedView
+            style={[
+              styles.aboutSummaryCard,
+              {
+                backgroundColor: scheme === 'light' ? '#f8fafc' : '#111827',
+                borderColor: palette.icon,
+              },
+            ]}>
+            <ThemedText style={[styles.aboutSummaryTitle, { color: palette.tint }]}>Summary & Expertise</ThemedText>
+
+            <ThemedText style={styles.aboutParagraph}>
+              I am a focused professional in developing robust web architecture, content, and
+              platforms across both <ThemedText type="defaultSemiBold">Backend and Frontend</ThemedText>. My expertise spans multiple languages including <ThemedText type="defaultSemiBold">PHP, Python, JavaScript, TypeScript, and HTML</ThemedText>.
+            </ThemedText>
+
+            <ThemedText style={styles.aboutParagraph}>
+              I&apos;m passionate about building scalable applications using modern <ThemedText type="defaultSemiBold">MVC architecture frameworks</ThemedText> like Laravel, Symfony, Angular, Node.js, and Django. I have significant experience with both <ThemedText type="defaultSemiBold">MongoDB</ThemedText> and relational databases such as <ThemedText type="defaultSemiBold">MySQL</ThemedText> and MariaDB, ensuring effective data creation and manipulation using SQL.
+            </ThemedText>
+
+            <ThemedText style={styles.aboutParagraph}>
+              Furthermore, I possess a <ThemedText type="defaultSemiBold">Cloud Certificate Practitioner</ThemedText> status and experience with Linux OS. I am proficient in implementing essential <ThemedText type="defaultSemiBold">AWS services</ThemedText> (Route53, EC2, EBS, Load Balancer, Cloudfront, RDS) and utilize Git/GitHub for version control. I am driven to push every project to its highest level of performance and availability.
+            </ThemedText>
+          </ThemedView>
+        </View>
       </ThemedView>
 
       <ThemedView style={[styles.sectionCard, surface]}>
@@ -227,60 +239,66 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     elevation: 5,
   },
-  hero: {
-    borderWidth: 1,
-    borderRadius: 20,
-    padding: 18,
-    gap: 8,
-    overflow: 'hidden',
+  sectionHeadingWrap: {
+    alignItems: 'center',
   },
-  glow: {
-    position: 'absolute',
-    width: 220,
-    height: 220,
-    borderRadius: 999,
-    opacity: 0.13,
-  },
-  glowOne: {
-    right: -60,
-    top: -90,
-  },
-  glowTwo: {
-    left: -80,
-    bottom: -120,
-  },
-  kicker: {
-    letterSpacing: 1,
-    fontSize: 12,
-    fontWeight: '700',
-  },
-  heroTitle: {
-    fontSize: 34,
+  sectionHeading: {
+    fontSize: 32,
     lineHeight: 38,
     fontWeight: '800',
+    textAlign: 'center',
+    borderBottomWidth: 2,
+    paddingBottom: 8,
   },
-  heroSubtitle: {
-    fontSize: 16,
-    lineHeight: 23,
-    maxWidth: 680,
+  aboutGrid: {
+    gap: 12,
   },
-  badgeRow: {
-    marginTop: 8,
+  aboutGridWide: {
+    flexDirection: 'row',
+    alignItems: 'stretch',
+  },
+  aboutProfileCard: {
+    borderRadius: 16,
+    padding: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    flex: 1,
+  },
+  profileImage: {
+    width: 128,
+    height: 128,
+    borderRadius: 64,
+    borderWidth: 4,
+    padding: 4,
+    marginBottom: 8,
+  },
+  profileLocation: {
+    color: '#ffffff',
+    fontSize: 18,
+    fontWeight: '700',
+  },
+  profileLink: {
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  aboutSummaryCard: {
+    flex: 2,
+    borderWidth: 1,
+    borderRadius: 16,
+    padding: 20,
+    justifyContent: 'center',
     gap: 8,
   },
-  badgeRowWide: {
-    flexDirection: 'row',
+  aboutSummaryTitle: {
+    fontSize: 24,
+    lineHeight: 30,
+    fontWeight: '800',
+    marginBottom: 6,
   },
-  badge: {
-    borderWidth: 1,
-    borderRadius: 999,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    alignSelf: 'flex-start',
-  },
-  badgeText: {
-    fontSize: 13,
-    fontWeight: '600',
+  aboutParagraph: {
+    fontSize: 17,
+    lineHeight: 28,
   },
   sectionCard: {
     borderWidth: 1,
@@ -345,5 +363,60 @@ const styles = StyleSheet.create({
   },
   ctaOutlineText: {
     fontWeight: '700',
+  },
+  hero: {
+    borderWidth: 1,
+    borderRadius: 20,
+    padding: 18,
+    gap: 8,
+    overflow: 'hidden',
+  },
+  glow: {
+    position: 'absolute',
+    width: 220,
+    height: 220,
+    borderRadius: 999,
+    opacity: 0.13,
+  },
+  glowOne: {
+    right: -60,
+    top: -90,
+  },
+  glowTwo: {
+    left: -80,
+    bottom: -120,
+  },
+  kicker: {
+    letterSpacing: 1,
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  heroTitle: {
+    fontSize: 34,
+    lineHeight: 38,
+    fontWeight: '800',
+  },
+  heroSubtitle: {
+    fontSize: 16,
+    lineHeight: 23,
+    maxWidth: 680,
+  },
+  badgeRow: {
+    marginTop: 8,
+    gap: 8,
+  },
+  badgeRowWide: {
+    flexDirection: 'row',
+  },
+  badge: {
+    borderWidth: 1,
+    borderRadius: 999,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    alignSelf: 'flex-start',
+  },
+  badgeText: {
+    fontSize: 13,
+    fontWeight: '600',
   },
 });
