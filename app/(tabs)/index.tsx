@@ -181,13 +181,13 @@ export default function HomeScreen() {
   };
 
   return (
-    <View style={[styles.screen, { backgroundColor: palette.background }]}>
+    <View style={[styles.screen, { backgroundColor: '#111827' }]}> 
       <ScrollView
         ref={scrollRef}
-        style={{ backgroundColor: palette.background }}
+        style={{ backgroundColor: '#111827' }}
         contentContainerStyle={styles.page}
         showsVerticalScrollIndicator={false}>
-        <ThemedView style={[styles.introHero, surface]}>
+        <ThemedView style={[styles.introHero, { backgroundColor: '#111827' }]}> 
           <View style={styles.introContent}>
             <View style={styles.introHeadingRow}>
               <Image
@@ -202,6 +202,7 @@ export default function HomeScreen() {
                     fontFamily: Fonts.rounded,
                     fontSize: introTitleSize,
                     lineHeight: introTitleLineHeight,
+                    color: '#ffffff',
                   },
                 ]}>
                 Hello, I&apos;m{' '}
@@ -226,15 +227,15 @@ export default function HomeScreen() {
             />
 
             <View style={styles.bulletList}>
-              <ThemedText style={[styles.bulletItem, { fontSize: bulletFontSize, lineHeight: bulletLineHeight }]}>
+              <ThemedText style={[styles.bulletItem, { fontSize: bulletFontSize, lineHeight: bulletLineHeight, color: '#ffffff' }]}> 
                 - Full-Stack Web Developer
               </ThemedText>
-              <ThemedText style={[styles.bulletItem, { fontSize: bulletFontSize, lineHeight: bulletLineHeight }]}>
+              <ThemedText style={[styles.bulletItem, { fontSize: bulletFontSize, lineHeight: bulletLineHeight, color: '#ffffff' }]}> 
                 - Cloud Certificate Practitioner
               </ThemedText>
             </View>
 
-            <ThemedText style={[styles.introLead, { fontSize: introLeadSize, lineHeight: introLeadLineHeight }]}>
+            <ThemedText style={[styles.introLead, { fontSize: introLeadSize, lineHeight: introLeadLineHeight, color: '#ffffff' }]}> 
               With a focus on scalable architecture and enterprise solutions.
             </ThemedText>
 
@@ -486,7 +487,7 @@ const styles = StyleSheet.create({
     paddingBottom: 110,
   },
   introHero: {
-    borderWidth: 1,
+    borderWidth: 0,
     borderRadius: 20,
     padding: 18,
     justifyContent: 'center',
