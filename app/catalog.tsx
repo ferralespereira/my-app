@@ -14,8 +14,6 @@ type CatalogProject = {
 };
 
 const PROJECTS: CatalogProject[] = [
-  { name: 'Del Toro Insurance', url: 'https://deltoroinsurance.com', frameworks: ['Wordpress'], languages: ['PHP'] },
-  { name: 'IMS Del Toro Insurance', url: 'https://ims.deltoroinsurance.com', frameworks: ['Laravel'], languages: ['PHP'] },
   { name: 'Django Project', url: 'https://django.javierfolder.com', frameworks: ['Django'], languages: ['Python'] },
   { name: 'MyShop', url: 'https://myshop.javierfolder.com', frameworks: ['Yii3'], languages: ['PHP'] },
   { name: 'Yii3 Project', url: 'https://yii.javierfolder.com', frameworks: ['Yii3'], languages: ['PHP'] },
@@ -32,6 +30,8 @@ const PROJECTS: CatalogProject[] = [
   { name: 'Foro', url: 'https://foro.javierfolder.com', frameworks: ['Angular', 'Node.js'], languages: ['JavaScript'] },
   { name: 'Video', url: 'https://video.javierfolder.com', frameworks: ['Angular', 'Symfony'], languages: ['JavaScript', 'PHP'] },
   { name: 'My Gallery', url: 'https://asp.javierfolder.com', frameworks: ['ASP.NET'], languages: ['C#'] },
+  { name: 'Del Toro Insurance', url: 'https://deltoroinsurance.com', frameworks: ['Wordpress'], languages: ['PHP'] },
+  { name: 'IMS Del Toro Insurance', url: 'https://ims.deltoroinsurance.com', frameworks: ['Laravel'], languages: ['PHP'] },
 ];
 
 const FRAMEWORK_ICONS: Record<string, string> = {
