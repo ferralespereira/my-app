@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Linking, Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
@@ -168,6 +168,7 @@ const PROJECTS = [
 export default function HomeScreen() {
   const scheme = useColorScheme() ?? 'light';
   const palette = Colors[scheme];
+  const [isAboutExpanded, setIsAboutExpanded] = useState(false);
   const { width } = useWindowDimensions();
   const isWide = width >= 760;
   const introTitleSize = width >= 1024 ? 64 : width >= 760 ? 54 : width >= 520 ? 44 : 15;
@@ -273,17 +274,30 @@ export default function HomeScreen() {
             <ThemedText style={[styles.aboutSummaryTitle, { color: palette.tint }]}>Summary & Expertise</ThemedText>
 
             <ThemedText style={styles.aboutParagraph}>
-              I am a focused professional in developing robust web architecture, content, and
-              platforms across both <ThemedText type="defaultSemiBold">Backend and Frontend</ThemedText>. My expertise spans multiple languages including <ThemedText type="defaultSemiBold">PHP, Python, JavaScript, TypeScript, and HTML</ThemedText>.
+              I am a focused professional in developing robust web architecture, content, and platforms across both Backend and Frontend. My expertise spans multiple languages including PHP, Python, JavaScript, TypeScript, and HTML.
             </ThemedText>
 
-            <ThemedText style={styles.aboutParagraph}>
-              I&apos;m passionate about building scalable applications using modern <ThemedText type="defaultSemiBold">MVC architecture frameworks</ThemedText> like Laravel, Symfony, Angular, Node.js, and Django. I have significant experience with both <ThemedText type="defaultSemiBold">MongoDB</ThemedText> and relational databases such as <ThemedText type="defaultSemiBold">MySQL</ThemedText> and MariaDB, ensuring effective data creation and manipulation using SQL.
-            </ThemedText>
+            {!isAboutExpanded && (
+              <Pressable onPress={() => setIsAboutExpanded(true)}>
+                <ThemedText style={[styles.learnMoreText, { color: palette.tint }]}>Learn more -&gt;</ThemedText>
+              </Pressable>
+            )}
 
-            <ThemedText style={styles.aboutParagraph}>
-              Furthermore, I possess a <ThemedText type="defaultSemiBold">Cloud Certificate Practitioner</ThemedText> status and experience with Linux OS. I am proficient in implementing essential <ThemedText type="defaultSemiBold">AWS services</ThemedText> (Route53, EC2, EBS, Load Balancer, Cloudfront, RDS) and utilize Git/GitHub for version control. I am driven to push every project to its highest level of performance and availability.
-            </ThemedText>
+            {isAboutExpanded && (
+              <>
+                <ThemedText style={styles.aboutParagraph}>
+                  I&apos;m passionate about building scalable applications using modern <ThemedText type="defaultSemiBold">MVC architecture frameworks</ThemedText> like Laravel, Symfony, Angular, Node.js, and Django. I have significant experience with both <ThemedText type="defaultSemiBold">MongoDB</ThemedText> and relational databases such as <ThemedText type="defaultSemiBold">MySQL</ThemedText> and MariaDB, ensuring effective data creation and manipulation using SQL.
+                </ThemedText>
+
+                <ThemedText style={styles.aboutParagraph}>
+                  Furthermore, I possess a <ThemedText type="defaultSemiBold">Cloud Certificate Practitioner</ThemedText> status and experience with Linux OS. I am proficient in implementing essential <ThemedText type="defaultSemiBold">AWS services</ThemedText> (Route53, EC2, EBS, Load Balancer, Cloudfront, RDS) and utilize Git/GitHub for version control. I am driven to push every project to its highest level of performance and availability.
+                </ThemedText>
+
+                <Pressable onPress={() => setIsAboutExpanded(false)}>
+                  <ThemedText style={[styles.learnMoreText, { color: palette.tint }]}>Show less &lt;-</ThemedText>
+                </Pressable>
+              </>
+            )}
           </ThemedView>
         </View>
       </ThemedView>
@@ -519,6 +533,10 @@ const styles = StyleSheet.create({
   aboutParagraph: {
     fontSize: 17,
     lineHeight: 28,
+  },
+  learnMoreText: {
+    fontSize: 14,
+    fontWeight: '700',
   },
   sectionCard: {
     borderWidth: 1,
