@@ -349,12 +349,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#3b82f6',
     borderRadius: 8,
     paddingHorizontal: 10,
-    paddingVertical: 8,
+    paddingVertical: 0,
   },
   linkButtonText: {
     color: '#ffffff',
-    fontWeight: '700',
-    fontSize: 12,
+    fontWeight: '500',
+    fontSize: 10,
   },
   ghostButton: {
     borderWidth: 1,
