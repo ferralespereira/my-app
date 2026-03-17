@@ -374,21 +374,6 @@ export default function HomeScreen() {
       </ThemedView>
 
       <ThemedView style={[styles.sectionCard, surface]}>
-        <ThemedText type="subtitle">Featured Projects</ThemedText>
-        <View style={styles.projectsWrap}>
-          {PROJECTS.map((project) => (
-            <View key={project.name} style={[styles.projectCard, { borderColor: palette.icon }]}>
-              <ThemedText style={styles.projectName}>{project.name}</ThemedText>
-              <ThemedText style={[styles.projectStack, { color: palette.tint }]}>
-                {project.stack}
-              </ThemedText>
-              <ThemedText>{project.description}</ThemedText>
-            </View>
-          ))}
-        </View>
-      </ThemedView>
-
-      <ThemedView style={[styles.sectionCard, surface]}>
         <ThemedText type="subtitle">Get In Touch</ThemedText>
         <ThemedText>Email: ferralespereira@gmail.com</ThemedText>
         <View style={styles.ctaRow}>
