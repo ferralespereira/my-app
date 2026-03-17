@@ -178,8 +178,8 @@ export default function HomeScreen() {
   const bulletLineHeight = width >= 760 ? 28 : width >= 520 ? 25 : 22;
   const introLeadSize = width >= 760 ? 20 : 15;
   const introLeadLineHeight = width >= 760 ? 28 : 24;
-  const skillCardWidth = width >= 1280 ? '18%' : width >= 1024 ? '23%' : width >= 760 ? '31%' : width >= 520 ? '47%' : '100%';
-  const frameworkCardWidth = width >= 1024 ? '18%' : width >= 760 ? '31%' : width >= 520 ? '47%' : '100%';
+  const skillCardWidth = width >= 1280 ? '17%' : width >= 1024 ? '22%' : width >= 760 ? '30%' : width >= 520 ? '46%' : '48%';
+  const frameworkCardWidth = width >= 1024 ? '17%' : width >= 760 ? '30%' : width >= 520 ? '46%' : '48%';
 
   const surface = useMemo(
     () => ({
@@ -477,8 +477,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sectionHeading: {
-    fontSize: 32,
-    lineHeight: 38,
+    fontSize: 16,
+    lineHeight: 24,
     fontWeight: '800',
     textAlign: 'center',
     borderBottomWidth: 2,
@@ -547,17 +547,17 @@ const styles = StyleSheet.create({
   skillsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
+    gap: 10,
   },
   frameworksGrid: {
     justifyContent: 'center',
   },
   skillCard: {
     borderRadius: 16,
-    padding: 20,
+    padding: 14,
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: 172,
+    minHeight: 148,
     shadowColor: '#3b82f6',
     shadowOpacity: 0.16,
     shadowRadius: 12,
@@ -565,18 +565,18 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   skillIconRow: {
-    minHeight: 56,
+    minHeight: 44,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 8,
   },
   skillIconRowMultiple: {
     flexDirection: 'row',
     gap: 8,
   },
   skillIcon: {
-    width: 48,
-    height: 48,
+    width: 38,
+    height: 38,
   },
   skillIconPadded: {
     backgroundColor: '#ffffff',
@@ -584,23 +584,23 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   skillTitle: {
-    fontSize: 20,
-    lineHeight: 24,
+    fontSize: 16,
+    lineHeight: 20,
     fontWeight: '700',
     textAlign: 'center',
-    marginBottom: 4,
+    marginBottom: 2,
   },
   skillSubtitle: {
-    fontSize: 13,
-    lineHeight: 18,
+    fontSize: 12,
+    lineHeight: 16,
     textAlign: 'center',
   },
   frameworkCard: {
     borderRadius: 16,
-    padding: 20,
+    padding: 14,
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: 168,
+    minHeight: 144,
     shadowColor: '#3b82f6',
     shadowOpacity: 0.16,
     shadowRadius: 12,
@@ -608,11 +608,11 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   frameworkTitle: {
-    fontSize: 20,
-    lineHeight: 24,
+    fontSize: 16,
+    lineHeight: 20,
     fontWeight: '700',
     textAlign: 'center',
-    marginBottom: 4,
+    marginBottom: 2,
   },
   projectsWrap: {
     gap: 10,
