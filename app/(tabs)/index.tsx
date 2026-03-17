@@ -175,7 +175,7 @@ export default function HomeScreen() {
   const badgeSize = width >= 760 ? 196 : width >= 520 ? 176 : 140;
   const bulletFontSize = width >= 760 ? 22 : width >= 520 ? 19 : 16;
   const bulletLineHeight = width >= 760 ? 28 : width >= 520 ? 25 : 22;
-  const introLeadSize = width >= 760 ? 20 : 17;
+  const introLeadSize = width >= 760 ? 20 : 15;
   const introLeadLineHeight = width >= 760 ? 28 : 24;
   const skillCardWidth = width >= 1280 ? '18%' : width >= 1024 ? '23%' : width >= 760 ? '31%' : width >= 520 ? '47%' : '100%';
   const frameworkCardWidth = width >= 1024 ? '18%' : width >= 760 ? '31%' : width >= 520 ? '47%' : '100%';
@@ -409,6 +409,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 18,
     justifyContent: 'center',
+    marginTop: 32,
   },
   introContent: {
     alignItems: 'center',
@@ -435,13 +436,16 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   introLead: {
-    textAlign: 'center',
+    textAlign: 'left',
     maxWidth: 640,
   },
   introActions: {
     marginTop: 6,
     gap: 10,
     width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   introActionsWide: {
     flexDirection: 'row',
