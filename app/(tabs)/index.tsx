@@ -168,10 +168,10 @@ const PROJECTS = [
 export default function HomeScreen() {
   const scheme = useColorScheme() ?? 'light';
   const palette = Colors[scheme];
-  const { width, height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const isWide = width >= 760;
-  const introTitleSize = width >= 1024 ? 64 : width >= 760 ? 54 : width >= 520 ? 44 : 34;
-  const introTitleLineHeight = width >= 1024 ? 72 : width >= 760 ? 60 : width >= 520 ? 50 : 40;
+  const introTitleSize = width >= 1024 ? 64 : width >= 760 ? 54 : width >= 520 ? 44 : 20;
+  const introTitleLineHeight = width >= 1024 ? 72 : width >= 760 ? 60 : width >= 520 ? 50 : 24;
   const badgeSize = width >= 760 ? 196 : width >= 520 ? 176 : 140;
   const bulletFontSize = width >= 760 ? 22 : width >= 520 ? 19 : 16;
   const bulletLineHeight = width >= 760 ? 28 : width >= 520 ? 25 : 22;
@@ -193,7 +193,7 @@ export default function HomeScreen() {
       style={{ backgroundColor: palette.background }}
       contentContainerStyle={styles.page}
       showsVerticalScrollIndicator={false}>
-      <ThemedView style={[styles.introHero, surface, { minHeight: height * 0.84 }]}>
+      <ThemedView style={[styles.introHero, surface]}>
         <View style={styles.introContent}>
           <ThemedText
             style={[
@@ -626,6 +626,7 @@ const styles = StyleSheet.create({
   ctaText: {
     color: '#ffffff',
     fontWeight: '700',
+    fontSize: 12,
   },
   ctaOutline: {
     borderWidth: 1,
@@ -635,6 +636,7 @@ const styles = StyleSheet.create({
   },
   ctaOutlineText: {
     fontWeight: '700',
+    fontSize: 12,
   },
   hero: {
     borderWidth: 1,
