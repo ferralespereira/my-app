@@ -1,98 +1,251 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { useMemo } from 'react';
+import { Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { Colors, Fonts } from '@/constants/theme';
+import { useColorScheme } from '@/hooks/use-color-scheme';
+
+const SKILLS = [
+  'PHP / Laravel',
+  'Python / Django / Flask',
+  'TypeScript / Angular',
+  'JavaScript / Node.js',
+  'MySQL / MongoDB / MariaDB',
+  'AWS / Linux / Docker',
+];
+
+const PROJECTS = [
+  {
+    name: 'Fuel Company Inventory System',
+    stack: 'Laravel, MySQL, Deployment',
+    description: 'Inventory workflows and reporting for operational teams.',
+  },
+  {
+    name: 'Angular + Node Dev Forum',
+    stack: 'Angular, Node.js, MongoDB',
+    description: 'Community platform for technical discussions and code sharing.',
+  },
+  {
+    name: 'Flask Real-Time Chat',
+    stack: 'Flask, Socket.IO',
+    description: 'Lightweight messaging app with real-time communication.',
+  },
+];
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const scheme = useColorScheme() ?? 'light';
+  const palette = Colors[scheme];
+  const { width } = useWindowDimensions();
+  const isWide = width >= 760;
 
+  const surface = useMemo(
+    () => ({
+      borderColor: scheme === 'light' ? '#d5dde6' : '#2f3742',
+      backgroundColor: scheme === 'light' ? '#f7fafc' : '#1b222b',
+    }),
+    [scheme],
+  );
+
+  return (
+    <ScrollView contentContainerStyle={styles.page} showsVerticalScrollIndicator={false}>
+      <ThemedView style={[styles.hero, surface]}>
+        <View style={[styles.glow, styles.glowOne, { backgroundColor: '#00a8e8' }]} />
+        <View style={[styles.glow, styles.glowTwo, { backgroundColor: '#f46036' }]} />
+
+        <ThemedText style={[styles.kicker, { color: palette.tint }]}>JAVIERFOLDER STYLE VIEW</ThemedText>
+        <ThemedText style={[styles.heroTitle, { fontFamily: Fonts.rounded }]}>
+          Hello, I&apos;m Javier Ferrales
+        </ThemedText>
+        <ThemedText style={styles.heroSubtitle}>
+          Full-stack developer focused on scalable architecture, platform quality, and cloud-ready
+          delivery.
+        </ThemedText>
+
+        <View style={[styles.badgeRow, isWide && styles.badgeRowWide]}>
+          <View style={[styles.badge, { borderColor: palette.tint }]}>
+            <ThemedText style={styles.badgeText}>Full-Stack Web Developer</ThemedText>
+          </View>
+          <View style={[styles.badge, { borderColor: palette.tint }]}>
+            <ThemedText style={styles.badgeText}>Cloud Practitioner</ThemedText>
+          </View>
+        </View>
+      </ThemedView>
+
+      <ThemedView style={[styles.sectionCard, surface]}>
+        <ThemedText type="subtitle">About</ThemedText>
         <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
+          I build robust backend and frontend solutions with a strong focus on maintainability,
+          performance, and business impact. I enjoy turning complex requirements into reliable,
+          production-ready systems.
         </ThemedText>
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
+
+      <ThemedView style={[styles.sectionCard, surface]}>
+        <ThemedText type="subtitle">Tech Stack</ThemedText>
+        <View style={[styles.chipWrap, isWide && styles.chipWrapWide]}>
+          {SKILLS.map((skill) => (
+            <View key={skill} style={[styles.chip, { borderColor: palette.icon }]}>
+              <ThemedText style={styles.chipText}>{skill}</ThemedText>
+            </View>
+          ))}
+        </View>
       </ThemedView>
-    </ParallaxScrollView>
+
+      <ThemedView style={[styles.sectionCard, surface]}>
+        <ThemedText type="subtitle">Featured Projects</ThemedText>
+        <View style={styles.projectsWrap}>
+          {PROJECTS.map((project) => (
+            <View key={project.name} style={[styles.projectCard, { borderColor: palette.icon }]}>
+              <ThemedText style={styles.projectName}>{project.name}</ThemedText>
+              <ThemedText style={[styles.projectStack, { color: palette.tint }]}>
+                {project.stack}
+              </ThemedText>
+              <ThemedText>{project.description}</ThemedText>
+            </View>
+          ))}
+        </View>
+      </ThemedView>
+
+      <ThemedView style={[styles.sectionCard, surface]}>
+        <ThemedText type="subtitle">Get In Touch</ThemedText>
+        <ThemedText>Email: ferralespereira@gmail.com</ThemedText>
+        <View style={styles.ctaRow}>
+          <Pressable style={[styles.cta, { backgroundColor: palette.tint }]}>
+            <ThemedText style={styles.ctaText}>View Projects</ThemedText>
+          </Pressable>
+          <Pressable style={[styles.ctaOutline, { borderColor: palette.tint }]}>
+            <ThemedText style={[styles.ctaOutlineText, { color: palette.tint }]}>Get In Touch</ThemedText>
+          </Pressable>
+        </View>
+      </ThemedView>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  page: {
+    padding: 16,
+    gap: 12,
+    paddingBottom: 24,
   },
-  stepContainer: {
+  hero: {
+    borderWidth: 1,
+    borderRadius: 20,
+    padding: 18,
     gap: 8,
-    marginBottom: 8,
+    overflow: 'hidden',
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
+  glow: {
     position: 'absolute',
+    width: 220,
+    height: 220,
+    borderRadius: 999,
+    opacity: 0.13,
+  },
+  glowOne: {
+    right: -60,
+    top: -90,
+  },
+  glowTwo: {
+    left: -80,
+    bottom: -120,
+  },
+  kicker: {
+    letterSpacing: 1,
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  heroTitle: {
+    fontSize: 34,
+    lineHeight: 38,
+    fontWeight: '800',
+  },
+  heroSubtitle: {
+    fontSize: 16,
+    lineHeight: 23,
+    maxWidth: 680,
+  },
+  badgeRow: {
+    marginTop: 8,
+    gap: 8,
+  },
+  badgeRowWide: {
+    flexDirection: 'row',
+  },
+  badge: {
+    borderWidth: 1,
+    borderRadius: 999,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    alignSelf: 'flex-start',
+  },
+  badgeText: {
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  sectionCard: {
+    borderWidth: 1,
+    borderRadius: 16,
+    padding: 14,
+    gap: 10,
+  },
+  chipWrap: {
+    gap: 8,
+  },
+  chipWrapWide: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  chip: {
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    alignSelf: 'flex-start',
+  },
+  chipText: {
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  projectsWrap: {
+    gap: 10,
+  },
+  projectCard: {
+    borderWidth: 1,
+    borderRadius: 12,
+    padding: 12,
+    gap: 5,
+  },
+  projectName: {
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  projectStack: {
+    fontSize: 13,
+    fontWeight: '700',
+  },
+  ctaRow: {
+    flexDirection: 'row',
+    gap: 8,
+    flexWrap: 'wrap',
+  },
+  cta: {
+    borderRadius: 10,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+  },
+  ctaText: {
+    color: '#ffffff',
+    fontWeight: '700',
+  },
+  ctaOutline: {
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+  },
+  ctaOutlineText: {
+    fontWeight: '700',
   },
 });
