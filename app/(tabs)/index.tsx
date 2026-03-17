@@ -8,12 +8,96 @@ import { Colors, Fonts } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
 const SKILLS = [
-  'PHP / Laravel',
-  'Python / Django / Flask',
-  'TypeScript / Angular',
-  'JavaScript / Node.js',
-  'MySQL / MongoDB / MariaDB',
-  'AWS / Linux / Docker',
+  {
+    title: 'PHP',
+    subtitle: 'Laravel',
+    icons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg'],
+  },
+  {
+    title: 'Python',
+    subtitle: 'Django, Flask',
+    icons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg'],
+  },
+  {
+    title: 'TypeScript',
+    subtitle: 'Angular',
+    icons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg'],
+  },
+  {
+    title: 'JavaScript',
+    subtitle: 'Node.js, jQuery',
+    icons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg'],
+  },
+  {
+    title: 'HTML',
+    subtitle: 'Semantic Markup, Accessibility',
+    icons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg'],
+  },
+  {
+    title: 'CSS',
+    subtitle: 'Tailwind, SCSS, Responsive Design',
+    icons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg'],
+  },
+  {
+    title: 'Bootstrap',
+    subtitle: 'Responsive UI Framework',
+    icons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg'],
+  },
+  {
+    title: 'C# & ASP.net',
+    subtitle: 'Full-Stack Windows',
+    icons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg'],
+  },
+  {
+    title: 'SQL & Databases',
+    subtitle: 'MySQL, MongoDb, MariaDB',
+    icons: [
+      'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
+      'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+    ],
+  },
+  {
+    title: 'AWS Services',
+    subtitle: 'EC2, Route53, CloudFront',
+    icons: ['https://javierfolder.com/aws.webp'],
+    paddedIcon: true,
+  },
+  {
+    title: 'Linux OS',
+    subtitle: 'System Administration, Docker',
+    icons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg'],
+  },
+  {
+    title: 'Angular & Frontend',
+    subtitle: 'Responsive Design',
+    icons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg'],
+  },
+  {
+    title: 'Git / Version Control',
+    subtitle: 'GitHub Mastery',
+    icons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg'],
+  },
+  {
+    title: 'CMS & E-commerce',
+    subtitle: 'WordPress, Aimeos',
+    icons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg'],
+    paddedIcon: true,
+  },
+  {
+    title: 'SEO & Analytics',
+    subtitle: 'SEM, Google Analytics',
+    icons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg'],
+  },
+  {
+    title: 'Docker',
+    subtitle: 'Containerization & DevOps',
+    icons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg'],
+  },
+  {
+    title: 'Kubernetes',
+    subtitle: 'Container Orchestration',
+    icons: ['https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg'],
+  },
 ];
 
 const PROJECTS = [
@@ -39,6 +123,7 @@ export default function HomeScreen() {
   const palette = Colors[scheme];
   const { width, height } = useWindowDimensions();
   const isWide = width >= 760;
+  const skillCardWidth = width >= 1280 ? '18%' : width >= 1024 ? '23%' : width >= 760 ? '31%' : width >= 520 ? '47%' : '100%';
 
   const surface = useMemo(
     () => ({
@@ -134,12 +219,40 @@ export default function HomeScreen() {
       </ThemedView>
 
       <ThemedView style={[styles.sectionCard, surface]}>
-        <ThemedText type="subtitle">Tech Stack</ThemedText>
-        <View style={[styles.chipWrap, isWide && styles.chipWrapWide]}>
+        <View style={styles.sectionHeadingWrap}>
+          <ThemedText style={[styles.sectionHeading, { borderColor: palette.tint }]}>
+            Tech Stack & Computer Skills
+          </ThemedText>
+        </View>
+
+        <View style={styles.skillsGrid}>
           {SKILLS.map((skill) => (
-            <View key={skill} style={[styles.chip, { borderColor: palette.icon }]}>
-              <ThemedText style={styles.chipText}>{skill}</ThemedText>
-            </View>
+            <ThemedView
+              key={skill.title}
+              style={[
+                styles.skillCard,
+                {
+                  width: skillCardWidth,
+                  backgroundColor: scheme === 'light' ? '#111827' : '#0f172a',
+                },
+              ]}>
+              <View style={[styles.skillIconRow, skill.icons.length > 1 && styles.skillIconRowMultiple]}>
+                {skill.icons.map((icon) => (
+                  <Image
+                    key={icon}
+                    source={{ uri: icon }}
+                    style={[styles.skillIcon, skill.paddedIcon && styles.skillIconPadded]}
+                    contentFit="contain"
+                  />
+                ))}
+              </View>
+              <ThemedText lightColor="#ffffff" darkColor="#ffffff" style={styles.skillTitle}>
+                {skill.title}
+              </ThemedText>
+              <ThemedText lightColor="#9ca3af" darkColor="#9ca3af" style={styles.skillSubtitle}>
+                {skill.subtitle}
+              </ThemedText>
+            </ThemedView>
           ))}
         </View>
       </ThemedView>
@@ -306,23 +419,53 @@ const styles = StyleSheet.create({
     padding: 14,
     gap: 10,
   },
-  chipWrap: {
-    gap: 8,
-  },
-  chipWrapWide: {
+  skillsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    gap: 12,
   },
-  chip: {
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    alignSelf: 'flex-start',
+  skillCard: {
+    borderRadius: 16,
+    padding: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 172,
+    shadowColor: '#3b82f6',
+    shadowOpacity: 0.16,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 4,
   },
-  chipText: {
-    fontSize: 14,
-    fontWeight: '600',
+  skillIconRow: {
+    minHeight: 56,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  skillIconRowMultiple: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  skillIcon: {
+    width: 48,
+    height: 48,
+  },
+  skillIconPadded: {
+    backgroundColor: '#ffffff',
+    borderRadius: 8,
+    padding: 4,
+  },
+  skillTitle: {
+    fontSize: 20,
+    lineHeight: 24,
+    fontWeight: '700',
+    textAlign: 'center',
+    marginBottom: 4,
+  },
+  skillSubtitle: {
+    fontSize: 13,
+    lineHeight: 18,
+    textAlign: 'center',
   },
   projectsWrap: {
     gap: 10,
