@@ -75,7 +75,7 @@ export default function CatalogScreen() {
     });
   }, [activeFilter, query]);
 
-  const cardWidth = width >= 1280 ? '23%' : width >= 1024 ? '31%' : width >= 760 ? '48%' : '100%';
+  const cardWidth = width >= 1280 ? '23%' : width >= 1024 ? '31%' : width >= 760 ? '48%' : '48%';
 
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.page} showsVerticalScrollIndicator={false}>
@@ -275,11 +275,11 @@ const styles = StyleSheet.create({
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
+    gap: 10,
   },
   card: {
     backgroundColor: '#1f2937',
-    borderRadius: 14,
+    borderRadius: 12,
     borderWidth: 1,
     borderColor: '#374151',
     overflow: 'hidden',
@@ -287,8 +287,8 @@ const styles = StyleSheet.create({
   cardHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
-    padding: 12,
+    gap: 8,
+    padding: 10,
     borderBottomWidth: 1,
     borderColor: '#374151',
   },
@@ -297,25 +297,25 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   frameworkIcon: {
-    width: 30,
-    height: 30,
+    width: 24,
+    height: 24,
     backgroundColor: '#ffffff',
-    borderRadius: 6,
-    padding: 3,
+    borderRadius: 5,
+    padding: 2,
   },
   cardTitle: {
     flex: 1,
     color: '#f3f4f6',
     fontWeight: '700',
-    fontSize: 15,
-    lineHeight: 20,
+    fontSize: 13,
+    lineHeight: 18,
   },
   badgesRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 6,
-    paddingHorizontal: 12,
-    paddingTop: 10,
+    gap: 5,
+    paddingHorizontal: 10,
+    paddingTop: 8,
   },
   frameworkBadge: {
     backgroundColor: '#1e3a8a',
@@ -331,19 +331,19 @@ const styles = StyleSheet.create({
   },
   badgeText: {
     color: '#dbeafe',
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: '600',
   },
   urlText: {
     color: '#6b7280',
-    fontSize: 12,
-    paddingHorizontal: 12,
-    paddingTop: 10,
+    fontSize: 11,
+    paddingHorizontal: 10,
+    paddingTop: 8,
   },
   cardActions: {
     flexDirection: 'row',
-    gap: 10,
-    padding: 12,
+    gap: 8,
+    padding: 10,
   },
   linkButton: {
     backgroundColor: '#3b82f6',
