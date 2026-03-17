@@ -439,7 +439,7 @@ export default function HomeScreen() {
                 { color: palette.tint },
                 activeSection === 'home' && styles.sectionTabButtonTextActive,
               ]}>
-              Home
+              Intro
             </ThemedText>
           </Pressable>
           <Pressable
