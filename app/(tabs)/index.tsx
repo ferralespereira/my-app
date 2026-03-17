@@ -305,7 +305,7 @@ export default function HomeScreen() {
       </ThemedView>
 
         <ThemedView
-        style={[styles.sectionCard, surface]}
+        style={[styles.sectionCard, { backgroundColor: '#111827', borderWidth: 0 }]}
         onLayout={({ nativeEvent }) => {
           const y = nativeEvent.layout.y;
           setSectionOffsets((prev) => ({
@@ -314,7 +314,7 @@ export default function HomeScreen() {
           }));
         }}>
         <View style={styles.sectionHeadingWrap}>
-          <ThemedText style={[styles.sectionHeading, { borderColor: palette.tint }]}>
+          <ThemedText style={[styles.sectionHeading, { borderColor: palette.tint, color: '#ffffff' }]}> 
             Tech Stack & Computer Skills
           </ThemedText>
         </View>
@@ -327,7 +327,7 @@ export default function HomeScreen() {
                 styles.skillCard,
                 {
                   width: skillCardWidth,
-                  backgroundColor: scheme === 'light' ? '#111827' : '#0f172a',
+                  backgroundColor: '#1f2937',
                 },
               ]}>
               <View style={[styles.skillIconRow, skill.icons.length > 1 && styles.skillIconRowMultiple]}>
@@ -352,7 +352,7 @@ export default function HomeScreen() {
       </ThemedView>
 
         <ThemedView
-        style={[styles.sectionCard, surface]}
+        style={[styles.sectionCard, { backgroundColor: '#111827', borderWidth: 0 }]}
         onLayout={({ nativeEvent }) => {
           const y = nativeEvent.layout.y;
           setSectionOffsets((prev) => ({
@@ -361,7 +361,7 @@ export default function HomeScreen() {
           }));
         }}>
         <View style={styles.sectionHeadingWrap}>
-          <ThemedText style={[styles.sectionHeading, { borderColor: palette.tint }]}>Frameworks</ThemedText>
+          <ThemedText style={[styles.sectionHeading, { borderColor: palette.tint, color: '#ffffff' }]}>Frameworks</ThemedText>
         </View>
 
         <View style={[styles.skillsGrid, styles.frameworksGrid]}>
@@ -372,7 +372,7 @@ export default function HomeScreen() {
                 styles.frameworkCard,
                 {
                   width: frameworkCardWidth,
-                  backgroundColor: scheme === 'light' ? '#1f2937' : '#111827',
+                  backgroundColor: '#1f2937',
                 },
               ]}>
               <Image
