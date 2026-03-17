@@ -81,7 +81,7 @@ export default function CatalogScreen() {
     <ScrollView style={styles.screen} contentContainerStyle={styles.page} showsVerticalScrollIndicator={false}>
       <ThemedView style={styles.hero}>
         <ThemedText style={styles.heroTitle}>
-          Project <ThemedText style={styles.heroTitleAccent}>Catalog</ThemedText>
+          Projects <ThemedText style={styles.heroTitleAccent}>Catalog</ThemedText>
         </ThemedText>
         <ThemedText style={styles.heroSubtitle}>
           A full directory of web projects, live demos, and technology stacks.
@@ -194,6 +194,7 @@ const styles = StyleSheet.create({
   },
   page: {
     padding: 16,
+    paddingTop: 40,
     gap: 14,
     paddingBottom: 28,
   },
@@ -206,7 +207,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   heroTitle: {
-    fontSize: 34,
+    fontSize: 22,
     lineHeight: 40,
     fontWeight: '800',
     color: '#f3f4f6',
